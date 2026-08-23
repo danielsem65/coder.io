@@ -85,6 +85,63 @@ class ShellSession(private val cwd: String = "/data/local/tmp") {
     }
 
     /**
+     * Send a command and capture all output until the prompt returns.
+     * This is a blocking call that waits for the command to finish.
+     * Uses a unique marker to detect completion.
+     */
+    suspend fun sendCommand(command: String, timeoutMs: Long = 30000L): String {
+        if (!isRunning) {
+            return "Error: Shell not running"
+        }
+
+        return kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+            val marker = "SEMEXIT_$${System.nanoTime()}"
+            val doneMarker = "DONE_$marker"
+            val output = StringBuilder()
+
+            // Temporarily override onOutput to capture
+            val prevOnOutput = onOutput
+            val capturing = object : java.util.concurrent.CountDownLatch(1) {
+                @Volatile var captured = ""
+            }
+
+            onOutput = { text ->
+                output.append(text)
+                if (text.contains(doneMarker)) {
+                    capturing.captured = output.toString()
+                    capturing.countDown()
+                }
+                prevOnOutput?.invoke(text)
+            }
+
+            try {
+                // Send the actual command followed by an echo marker
+                stdin?.writeBytes("$command; echo $doneMarker\n")
+                stdin?.flush()
+
+                val completed = capturing.await(timeoutMs, java.util.concurrent.TimeUnit.MILLISECONDS)
+
+                if (completed) {
+                    // Remove the command echo and marker from output
+                    val raw = capturing.captured
+                    val markerIdx = raw.indexOf(doneMarker)
+                    if (markerIdx >= 0) {
+                        raw.substring(0, markerIdx).trimEnd()
+                    } else {
+                        raw.trimEnd()
+                    }
+                } else {
+                    output.toString().trimEnd()
+                }
+            } catch (e: Exception) {
+                "Error: ${e.message}"
+            } finally {
+                onOutput = prevOnOutput
+            }
+        }
+    }
+
+    /**
      * Send a special command that won't produce shell output noise.
      * Useful for PWD checks, env queries, etc.
      */
