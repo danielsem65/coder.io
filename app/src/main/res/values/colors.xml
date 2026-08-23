@@ -31,6 +31,7 @@
 
     <!-- Signals -->
     <color name="error">#FFFF6B6B</color>
+    <color name="status_error">#FFFF6B6B</color>
     <color name="warning">#FFFFD93D</color>
     <color name="nav_indicator">#FF18243A</color>
 </resources>

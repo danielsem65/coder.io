@@ -30,4 +30,12 @@
     <string name="preset_openai">OpenAI</string>
     <string name="about_section">About</string>
     <string name="about_line">coder.io — pocket coding companion.\nNative Android shell + AI assistant.</string>
+    <string name="welcome_message">👋 Welcome to coder.io!\n\nI\'m your AI coding assistant. Ask me anything about code, shell commands, debugging, or development.\n\nPowered by your configured AI provider.</string>
+    <string name="error_message">⚠️ Error: %1$s</string>
+    <string name="new_chat">New chat</string>
+    <string name="delete_chat">Delete chat</string>
+    <string name="chat_empty_title">No conversations yet</string>
+    <string name="chat_empty_subtitle">Start a new chat from the button above.</string>
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
 </resources>

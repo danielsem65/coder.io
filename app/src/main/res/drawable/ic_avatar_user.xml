@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="28dp"
+    android:height="28dp"
+    android:viewportWidth="28"
+    android:viewportHeight="28">
+    <!-- Person silhouette -->
+    <path
+        android:fillColor="#FF93A1B5"
+        android:pathData="M14,14C16.2,14 18,12.2 18,10C18,7.8 16.2,6 14,6C11.8,6 10,7.8 10,10C10,12.2 11.8,14 14,14Z" />
+    <path
+        android:fillColor="#FF93A1B5"
+        android:pathData="M14,16C10.7,16 8,17.3 8,19V20H20V19C20,17.3 17.3,16 14,16Z" />
+</vector>
