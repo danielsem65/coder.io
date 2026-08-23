@@ -92,7 +92,7 @@ class ChatFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             val result = aiService.chat(conversationHistory)
 
-            loadingView.remove()
+            (loadingView.parent as? ViewGroup)?.removeView(loadingView)
 
             result.onSuccess { response ->
                 conversationHistory.add(AiChatService.ChatMessage("assistant", response))
