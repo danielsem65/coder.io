@@ -193,6 +193,12 @@ Be concise, practical, and provide code examples when relevant. Use markdown for
             onDone: () -> Unit,
             onError: (String) -> Unit
         ) = withContext(Dispatchers.IO) {
+            // All callbacks MUST run on the main thread — callers touch views.
+            val mainHandler = android.os.Handler(android.os.Looper.getMainLooper())
+            fun emitToken(t: String) { mainHandler.post { onToken(t) } }
+            fun emitDone() { mainHandler.post { onDone() } }
+            fun emitError(e: String) { mainHandler.post { onError(e) } }
+
             try {
                 val service = AiChatService(context)
                 val apiKey = service.getApiKey()
@@ -200,7 +206,7 @@ Be concise, practical, and provide code examples when relevant. Use markdown for
                 val model = service.getModel()
 
                 if (apiKey.isBlank()) {
-                    onError("API key not configured. Open Settings to add one.")
+                    emitError("API key not configured. Open Settings to add one.")
                     return@withContext
                 }
 
@@ -235,13 +241,13 @@ Be concise, practical, and provide code examples when relevant. Use markdown for
                     } catch (_: Exception) {
                         "HTTP ${response.code}: $errorBody"
                     }
-                    onError("API error: $errorMsg")
+                    emitError("API error: $errorMsg")
                     return@withContext
                 }
 
                 // Read SSE stream
                 val source = response.body?.source() ?: run {
-                    onError("Empty response body")
+                    emitError("Empty response body")
                     return@withContext
                 }
 
@@ -267,7 +273,7 @@ Be concise, practical, and provide code examples when relevant. Use markdown for
                                 if (delta.has("content") && !delta.isNull("content")) {
                                     val token = delta.getString("content")
                                     completeResponse.append(token)
-                                    onToken(token)
+                                    emitToken(token)
                                 }
                             } catch (_: Exception) {
                                 // Skip malformed SSE chunks
@@ -281,7 +287,7 @@ Be concise, practical, and provide code examples when relevant. Use markdown for
                 }
 
                 if (completeResponse.isNotEmpty()) {
-                    onDone()
+                    emitDone()
                 } else {
                     // Fallback: try non-streaming if SSE produced nothing
                     val fallbackResult = service.chat(
@@ -289,17 +295,17 @@ Be concise, practical, and provide code examples when relevant. Use markdown for
                     )
                     fallbackResult.fold(
                         onSuccess = { text ->
-                            onToken(text)
-                            onDone()
+                            emitToken(text)
+                            emitDone()
                         },
                         onFailure = { e ->
-                            onError(e.message ?: "Unknown error")
+                            emitError(e.message ?: "Unknown error")
                         }
                     )
                 }
 
             } catch (e: Exception) {
-                onError("Network error: ${e.message}")
+                emitError("Network error: ${e.message}")
             }
         }
     }
