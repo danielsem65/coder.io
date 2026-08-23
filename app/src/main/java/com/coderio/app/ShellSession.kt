@@ -114,7 +114,7 @@ class ShellSession(private val cwd: String = "/data/local/tmp") {
     private suspend fun readStream(reader: BufferedReader, isErr: Boolean = false) {
         try {
             val buf = CharArray(4096)
-            while (isActive) {
+            while (kotlin.coroutines.coroutineContext.isActive) {
                 val n = reader.read(buf)
                 if (n == -1) break
                 val text = String(buf, 0, n)
