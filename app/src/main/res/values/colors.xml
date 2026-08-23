@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_primary">#FF0D1117</color>
+    <color name="bg_secondary">#FF161B22</color>
+    <color name="bg_surface">#FF1C2128</color>
+    <color name="accent">#FF58A6FF</color>
+    <color name="accent_green">#FF3FB950</color>
+    <color name="text_primary">#FFC9D1D9</color>
+    <color name="text_secondary">#FF8B949E</color>
+    <color name="terminal_bg">#FF0D1117</color>
+    <color name="terminal_text">#FF00FF41</color>
+    <color name="terminal_prompt">#FF58A6FF</color>
+    <color name="chat_user_bg">#FF1F6FEB</color>
+    <color name="chat_ai_bg">#FF238636</color>
+    <color name="user_bubble">#FF1F6FEB</color>
+    <color name="ai_bubble">#FF161B22</color>
+    <color name="error">#FFFF6B6B</color>
+    <color name="warning">#FFFFD93D</color>
+</resources>
