@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg_primary">#FF0D1117</color>
-    <color name="bg_secondary">#FF161B22</color>
-    <color name="bg_surface">#FF1C2128</color>
-    <color name="accent">#FF58A6FF</color>
+    <!-- Core surfaces -->
+    <color name="bg_primary">#FF0A0E14</color>
+    <color name="bg_secondary">#FF0F1520</color>
+    <color name="bg_surface">#FF151D2B</color>
+    <color name="stroke">#FF1E2937</color>
+    <color name="stroke_soft">#FF16202E</color>
+
+    <!-- Accents -->
+    <color name="accent">#FF4C9EFF</color>
+    <color name="accent_bright">#FF7CB8FF</color>
+    <color name="accent_deep">#FF1F5FD6</color>
+    <color name="accent_teal">#FF2DD4BF</color>
     <color name="accent_green">#FF3FB950</color>
-    <color name="text_primary">#FFC9D1D9</color>
-    <color name="text_secondary">#FF8B949E</color>
-    <color name="terminal_bg">#FF0D1117</color>
-    <color name="terminal_text">#FF00FF41</color>
-    <color name="terminal_prompt">#FF58A6FF</color>
-    <color name="chat_user_bg">#FF1F6FEB</color>
-    <color name="chat_ai_bg">#FF238636</color>
-    <color name="user_bubble">#FF1F6FEB</color>
-    <color name="ai_bubble">#FF161B22</color>
+
+    <!-- Text -->
+    <color name="text_primary">#FFE8EDF4</color>
+    <color name="text_secondary">#FF93A1B5</color>
+    <color name="text_faint">#FF5A6B82</color>
+
+    <!-- Terminal -->
+    <color name="terminal_bg">#FF05070B</color>
+    <color name="terminal_text">#FF3DD68C</color>
+    <color name="terminal_prompt">#FF4C9EFF</color>
+
+    <!-- Chat -->
+    <color name="chat_user_bg">#FF2E7CF6</color>
+    <color name="user_bubble">#FF2E7CF6</color>
+    <color name="ai_bubble">#FF151D2B</color>
+
+    <!-- Signals -->
     <color name="error">#FFFF6B6B</color>
     <color name="warning">#FFFFD93D</color>
+    <color name="nav_indicator">#FF18243A</color>
 </resources>

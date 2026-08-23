@@ -4,22 +4,27 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-
-    <!-- Terminal prompt ">" in accent blue -->
-    <path
-        android:fillColor="#FF58A6FF"
-        android:pathData="M44,36 L30,54 L44,72"
-        android:strokeWidth="6"
-        android:strokeColor="#FF58A6FF"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:fillAlpha="0" />
-
-    <!-- Underline "_" -->
-    <path
-        android:pathData="M54,54 L68,54"
-        android:strokeWidth="6"
-        android:strokeColor="#FF3FB950"
-        android:strokeLineCap="round" />
-
+    <group
+        android:scaleX="1.0"
+        android:scaleY="1.0"
+        android:translateX="0"
+        android:translateY="0">
+        <path
+            android:pathData="M44,42 L33,54 L44,66"
+            android:strokeColor="#FF7CB8FF"
+            android:strokeWidth="5.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M64,42 L75,54 L64,66"
+            android:strokeColor="#FF7CB8FF"
+            android:strokeWidth="5.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M59,37 L49,71"
+            android:strokeColor="#FF2DD4BF"
+            android:strokeWidth="5.5"
+            android:strokeLineCap="round" />
+    </group>
 </vector>

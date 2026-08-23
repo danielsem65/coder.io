@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_primary"
+    android:clipToPadding="false"
     android:padding="20dp">
 
     <LinearLayout
@@ -14,83 +15,154 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Settings"
-            android:textColor="@color/text_primary"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp" />
+            android:text="@string/tab_settings"
+            style="@style/Text.CoderIO.ScreenTitle"
+            android:layout_marginBottom="18dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OpenCode Zen Configuration"
-            android:textColor="@color/accent"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
+        <!-- Provider card -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="@string/api_key_label"
-            android:textColorHint="@color/text_secondary"
-            app:boxStrokeColor="@color/accent">
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="18dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/api_key_input"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/provider_section"
+                style="@style/Text.CoderIO.SectionLabel"
+                android:layout_marginBottom="14dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/presets_label"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/preset_zen"
+                    style="@style/Widget.CoderIO.QuickChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preset_zen" />
+
+                <TextView
+                    android:id="@+id/preset_groq"
+                    style="@style/Widget.CoderIO.QuickChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preset_groq" />
+
+                <TextView
+                    android:id="@+id/preset_openai"
+                    style="@style/Widget.CoderIO.QuickChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preset_openai" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:textColor="@color/text_primary"
-                android:inputType="textPassword" />
+                android:layout_marginBottom="12dp"
+                android:hint="@string/api_key_label"
+                android:textColorHint="@color/text_faint"
+                app:boxStrokeColor="@color/accent"
+                app:endIconMode="password_toggle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/api_key_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textColor="@color/text_primary"
+                    android:inputType="textPassword" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="@string/api_url_label"
-            android:textColorHint="@color/text_secondary"
-            app:boxStrokeColor="@color/accent">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/api_url_input"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:textColor="@color/text_primary"
-                android:inputType="textUri" />
+                android:layout_marginBottom="12dp"
+                android:hint="@string/api_url_label"
+                android:textColorHint="@color/text_faint"
+                app:boxStrokeColor="@color/accent">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/api_url_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textColor="@color/text_primary"
+                    android:inputType="textUri" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:hint="@string/api_model_label"
-            android:textColorHint="@color/text_secondary"
-            app:boxStrokeColor="@color/accent">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/model_input"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:textColor="@color/text_primary"
-                android:inputType="text" />
+                android:layout_marginBottom="6dp"
+                android:hint="@string/api_model_label"
+                android:textColorHint="@color/text_faint"
+                app:boxStrokeColor="@color/accent">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/model_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:textColor="@color/text_primary"
+                    android:inputType="text" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_save_settings"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/accent"
+                app:cornerRadius="14dp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- About card -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/accent"
-            android:textColor="@android:color/white" />
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_card"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_section"
+                style="@style/Text.CoderIO.SectionLabel"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_line"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/settings_status"
@@ -98,7 +170,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/accent_green"
             android:textSize="13sp"
-            android:layout_marginTop="12dp"
             android:gravity="center" />
 
     </LinearLayout>

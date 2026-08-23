@@ -37,6 +37,20 @@ class SettingsFragment : Fragment() {
 
         aiService = AiChatService(requireContext())
 
+        // Provider presets: fill URL + model, key stays as entered
+        view.findViewById<TextView>(R.id.preset_zen).setOnClickListener {
+            apiUrlInput.setText("https://opencode.ai/zen/v1")
+            modelInput.setText("big-pickle")
+        }
+        view.findViewById<TextView>(R.id.preset_groq).setOnClickListener {
+            apiUrlInput.setText("https://api.groq.com/openai/v1")
+            modelInput.setText("llama-3.3-70b-versatile")
+        }
+        view.findViewById<TextView>(R.id.preset_openai).setOnClickListener {
+            apiUrlInput.setText("https://api.openai.com/v1")
+            modelInput.setText("gpt-4o-mini")
+        }
+
         // Load saved settings
         loadSettings()
 

@@ -26,6 +26,7 @@ class TerminalFragment : Fragment() {
     private lateinit var terminalOutput: TextView
     private lateinit var terminalInput: EditText
     private lateinit var btnSend: ImageButton
+    private lateinit var statusText: TextView
 
     private var shell: ShellSession? = null
     private val handler = Handler(Looper.getMainLooper())
@@ -46,8 +47,23 @@ class TerminalFragment : Fragment() {
         terminalOutput = view.findViewById(R.id.terminal_output)
         terminalInput = view.findViewById(R.id.terminal_input)
         btnSend = view.findViewById(R.id.btn_send)
+        statusText = view.findViewById(R.id.term_status_text)
 
         btnSend.setOnClickListener { executeCommand() }
+
+        val quickCommands = mapOf(
+            R.id.chip_ls to "ls",
+            R.id.chip_pwd to "pwd",
+            R.id.chip_whoami to "whoami",
+            R.id.chip_uname to "uname -a",
+            R.id.chip_clear to "clear"
+        )
+        for ((chipId, command) in quickCommands) {
+            view.findViewById<View>(chipId).setOnClickListener {
+                terminalInput.setText(command)
+                executeCommand()
+            }
+        }
 
         terminalInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEND) {
@@ -80,6 +96,8 @@ class TerminalFragment : Fragment() {
             onClosed = {
                 handler.post {
                     appendOutput("\n--- Shell session ended. Tap ⏎ to restart ---\n")
+                    statusText.setText(R.string.terminal_status_ended)
+                    statusText.setTextColor(ContextCompat.getColor(requireContext(), R.color.error))
                 }
             }
         }
@@ -96,6 +114,9 @@ class TerminalFragment : Fragment() {
         handler.postDelayed({
             shell?.sendCommand("cd $cwd && pwd")
         }, 300)
+
+        statusText.setText(R.string.terminal_status_ready)
+        statusText.setTextColor(ContextCompat.getColor(requireContext(), R.color.accent_green))
     }
 
     private fun executeCommand() {

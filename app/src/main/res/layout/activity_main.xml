@@ -16,10 +16,16 @@
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_secondary"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_bottom_nav"
         app:itemIconTint="@color/bottom_nav_color"
         app:itemTextColor="@color/bottom_nav_color"
+        app:itemActiveIndicatorStyle="@style/Widget.CoderIO.NavIndicator"
+        app:itemRippleColor="@color/nav_indicator"
         app:labelVisibilityMode="labeled"
+        app:elevation="0dp"
         app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>

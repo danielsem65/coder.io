@@ -49,6 +49,9 @@ class ChatFragment : Fragment() {
 
         aiService = AiChatService(requireContext())
 
+        view.findViewById<TextView>(R.id.chat_model_label).text =
+            "AI Assistant \u2022 ${aiService.getModel()}"
+
         btnChatSend.setOnClickListener { sendMessage() }
 
         chatInput.setOnEditorActionListener { _, actionId, _ ->

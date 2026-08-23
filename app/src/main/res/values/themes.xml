@@ -1,13 +1,48 @@
 <resources>
-    <style name="Theme.CoderIO" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Forced dark base so the IDE look is consistent regardless of system setting -->
+    <style name="Theme.CoderIO" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/accent</item>
-        <item name="colorPrimaryVariant">#FF388bfd</item>
+        <item name="colorPrimaryVariant">@color/accent_deep</item>
         <item name="colorOnPrimary">@android:color/white</item>
-        <item name="colorSecondary">@color/accent_green</item>
+        <item name="colorSecondary">@color/accent_teal</item>
+        <item name="colorOnSurface">@color/text_primary</item>
         <item name="android:colorBackground">@color/bg_primary</item>
         <item name="colorSurface">@color/bg_secondary</item>
         <item name="android:statusBarColor">@color/bg_primary</item>
-        <item name="android:navigationBarColor">@color/bg_secondary</item>
+        <item name="android:navigationBarColor">@color/bg_primary</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <style name="Widget.CoderIO.NavIndicator" parent="">
+        <item name="android:background">@drawable/bg_nav_indicator</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <style name="Text.CoderIO.SectionLabel" parent="">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textColor">@color/text_faint</item>
+    </style>
+
+    <style name="Text.CoderIO.ScreenTitle" parent="">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Widget.CoderIO.QuickChip" parent="">
+        <item name="android:background">@drawable/bg_chip</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:paddingTop">7dp</item>
+        <item name="android:paddingBottom">7dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
     </style>
 </resources>

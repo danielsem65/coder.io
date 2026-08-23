@@ -3,15 +3,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/terminal_bg">
+    android:background="@color/bg_primary">
 
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terminal_title"
+                style="@style/Text.CoderIO.ScreenTitle" />
+
+            <TextView
+                android:id="@+id/term_status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="monospace"
+                android:text="@string/terminal_status_ready"
+                android:textColor="@color/accent_green"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip"
+            android:fontFamily="monospace"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="toybox"
+            android:textColor="@color/accent_teal"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Output -->
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="true"
-        android:padding="8dp">
+        android:clipToPadding="false"
+        android:background="@color/terminal_bg"
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/terminal_output"
@@ -20,17 +71,75 @@
             android:fontFamily="monospace"
             android:textColor="@color/terminal_text"
             android:textSize="13sp"
-            android:lineSpacingExtra="2dp"
+            android:lineSpacingExtra="3dp"
             android:textIsSelectable="true"
             android:text="@string/welcome_terminal" />
     </ScrollView>
 
+    <!-- Quick commands -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:background="@color/bg_secondary"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="2dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/chip_ls"
+                style="@style/Widget.CoderIO.QuickChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ls" />
+
+            <TextView
+                android:id="@+id/chip_pwd"
+                style="@style/Widget.CoderIO.QuickChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="pwd" />
+
+            <TextView
+                android:id="@+id/chip_whoami"
+                style="@style/Widget.CoderIO.QuickChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="whoami" />
+
+            <TextView
+                android:id="@+id/chip_uname"
+                style="@style/Widget.CoderIO.QuickChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="uname -a" />
+
+            <TextView
+                android:id="@+id/chip_clear"
+                style="@style/Widget.CoderIO.QuickChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="clear" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Prompt -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:background="@color/bg_secondary"
-        android:padding="8dp">
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,38 +147,39 @@
             android:text="$ "
             android:fontFamily="monospace"
             android:textColor="@color/terminal_prompt"
-            android:textSize="14sp"
+            android:textSize="15sp"
+            android:textStyle="bold"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="4dp" />
 
         <EditText
             android:id="@+id/terminal_input"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="46dp"
             android:layout_weight="1"
-            android:background="@color/bg_surface"
+            android:background="@drawable/bg_input_pill"
             android:fontFamily="monospace"
             android:textColor="@color/terminal_text"
-            android:textColorHint="@color/text_secondary"
+            android:textColorHint="@color/text_faint"
             android:hint="@string/hint_type_command"
             android:textSize="14sp"
             android:singleLine="true"
             android:imeOptions="actionSend"
             android:inputType="textNoSuggestions"
-            android:paddingHorizontal="12dp"
+            android:paddingHorizontal="14dp"
             android:paddingVertical="8dp" />
 
         <ImageButton
             android:id="@+id/btn_send"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_send_gradient"
             android:src="@android:drawable/ic_menu_send"
             android:contentDescription="@string/send"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:padding="10dp"
-            android:tint="@color/terminal_text" />
+            android:layout_marginStart="10dp"
+            android:padding="11dp"
+            android:tint="@android:color/white" />
 
     </LinearLayout>
 
