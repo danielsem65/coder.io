@@ -38,8 +38,8 @@ class AiChatService(context: Context) {
 Be concise, practical, and provide code examples when relevant. Use markdown formatting for code blocks.""""
 
     fun getApiKey(): String = prefs.getString("api_key", "") ?: ""
-    fun getApiUrl(): String = prefs.getString("api_url", "https://api.openai.com/v1") ?: ""
-    fun getModel(): String = prefs.getString("model", "gpt-3.5-turbo") ?: ""
+    fun getApiUrl(): String = prefs.getString("api_url", "https://opencode.ai/zen/v1") ?: ""
+    fun getModel(): String = prefs.getString("model", "big-pickle") ?: ""
 
     fun saveSettings(apiKey: String, apiUrl: String, model: String) {
         prefs.edit()
@@ -89,6 +89,12 @@ Be concise, practical, and provide code examples when relevant. Use markdown for
                 .url(url)
                 .addHeader("Authorization", "Bearer $apiKey")
                 .addHeader("Content-Type", "application/json")
+                // Zen gates its free models to official OpenCode clients by User-Agent
+                .apply {
+                    if (apiUrl.contains("opencode.ai")) {
+                        addHeader("User-Agent", "opencode/1.18.16")
+                    }
+                }
                 .post(body.toString().toRequestBody("application/json".toMediaType()))
                 .build()
 

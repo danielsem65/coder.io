@@ -61,8 +61,8 @@ class SettingsFragment : Fragment() {
 
     private fun saveSettings() {
         val key = apiKeyInput.text.toString().trim()
-        val url = apiUrlInput.text.toString().trim().ifBlank { "https://api.openai.com/v1" }
-        val model = modelInput.text.toString().trim().ifBlank { "gpt-3.5-turbo" }
+        val url = apiUrlInput.text.toString().trim().ifBlank { "https://opencode.ai/zen/v1" }
+        val model = modelInput.text.toString().trim().ifBlank { "big-pickle" }
 
         aiService.saveSettings(key, url, model)
         statusText.text = "✓ Saved — model: $model"
