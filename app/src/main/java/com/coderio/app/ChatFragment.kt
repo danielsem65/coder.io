@@ -115,11 +115,11 @@ class ChatFragment : Fragment() {
         }
 
         messages.forEach { msg ->
-            appendMessage(
-                text = msg.content,
-                isUser = msg.role == "user",
-                animate = false
-            )
+            if (msg.role == "user") {
+                appendMessage(text = msg.content, isUser = true, animate = false)
+            } else {
+                appendAiMessage(text = msg.content, animate = false)
+            }
         }
         scrollToBottom()
     }
@@ -130,7 +130,7 @@ class ChatFragment : Fragment() {
         val welcomeView = layoutInflater.inflate(R.layout.message_ai, messagesContainer, false)
         welcomeView.tag = TAG_WELCOME
         val bubble = welcomeView.findViewById<TextView>(R.id.tv_ai_message)
-        bubble.text = getString(R.string.welcome_message)
+        MarkdownRenderer.renderInto(getString(R.string.welcome_message), bubble)
         messagesContainer.addView(welcomeView)
         showingWelcome = true
     }
@@ -208,7 +208,9 @@ class ChatFragment : Fragment() {
                         messagesContainer.addView(aiView)
                     }
                     aiText += token
-                    aiView?.findViewById<TextView>(R.id.tv_ai_message)?.text = aiText
+                    aiView?.findViewById<TextView>(R.id.tv_ai_message)?.let { tv ->
+                        MarkdownRenderer.renderInto(aiText, tv)
+                    }
                     scrollToBottom()
                 },
                 onDone = {
@@ -223,7 +225,7 @@ class ChatFragment : Fragment() {
                     removeViewByTag(TAG_THINKING)
                     val errorView = layoutInflater.inflate(R.layout.message_ai, messagesContainer, false)
                     errorView.findViewById<TextView>(R.id.tv_ai_message).apply {
-                        text = getString(R.string.error_message, error)
+                        MarkdownRenderer.renderInto(getString(R.string.error_message, error), this)
                         setTextColor(ContextCompat.getColor(requireContext(), R.color.status_error))
                     }
                     messagesContainer.addView(errorView)
@@ -247,6 +249,18 @@ class ChatFragment : Fragment() {
         val tv = view.findViewById<TextView>(R.id.tv_ai_message)
             ?: view.findViewById<TextView>(R.id.tv_user_message)
         tv.text = text
+        if (animate) {
+            view.alpha = 0f
+            view.translationY = 30f
+            view.animate().alpha(1f).translationY(0f).setDuration(250).start()
+        }
+        messagesContainer.addView(view)
+    }
+
+    private fun appendAiMessage(text: String, animate: Boolean = true) {
+        val view = layoutInflater.inflate(R.layout.message_ai, messagesContainer, false)
+        val tv = view.findViewById<TextView>(R.id.tv_ai_message)
+        MarkdownRenderer.renderInto(text, tv)
         if (animate) {
             view.alpha = 0f
             view.translationY = 30f

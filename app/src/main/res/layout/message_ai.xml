@@ -45,7 +45,7 @@
 
         <TextView
             android:id="@+id/tv_ai_message"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bubble_ai"
             android:textColor="@color/text_primary"
@@ -54,7 +54,10 @@
             android:paddingStart="14dp"
             android:paddingEnd="14dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:paddingBottom="10dp"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:textIsSelectable="true" />
     </LinearLayout>
 
 </LinearLayout>
