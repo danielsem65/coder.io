@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">coder.io</string>
     <string name="tab_terminal">Terminal</string>
-    <string name="tab_chat">AI Chat</string>
+    <string name="tab_chat">Coder.io</string>
+    <string name="screen_title_chat">Coder.io</string>
     <string name="tab_settings">Settings</string>
     <string name="hint_type_command">Type a command…</string>
     <string name="hint_type_message">Ask anything…</string>
