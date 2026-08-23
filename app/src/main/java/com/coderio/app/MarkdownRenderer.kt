@@ -7,6 +7,7 @@ import android.text.*
 import android.text.style.*
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 /**
@@ -306,7 +307,7 @@ object MarkdownRenderer {
 
         val spans = mutableListOf<Span>()
 
-        fun addSpans(re: Pattern, factory: (MatchResult) -> Token?) {
+        fun addSpans(re: Pattern, factory: (Matcher) -> Token?) {
             val m = re.matcher(text)
             while (m.find()) {
                 val t = factory(m) ?: continue
