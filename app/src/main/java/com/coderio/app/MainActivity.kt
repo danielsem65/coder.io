@@ -1,13 +1,18 @@
 package com.coderio.app
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -98,6 +103,29 @@ class MainActivity : AppCompatActivity() {
         })
 
         setupDrawer()
+        ensureWorkspace()
+    }
+
+    // ── Workspace & permissions ───────────────────────────────
+
+    private fun ensureWorkspace() {
+        if (!WorkspaceConfig.hasStoragePermission()) {
+            WorkspaceConfig.requestStoragePermission(this)
+            // We'll check again in onResume
+            return
+        }
+        val dir = WorkspaceConfig.ensureWorkspace(this)
+        if (!dir.exists()) {
+            Toast.makeText(this, "Cannot create workspace at ${WorkspaceConfig.WORKSPACE_PATH}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Re-check after user returns from settings
+        if (WorkspaceConfig.hasStoragePermission()) {
+            WorkspaceConfig.ensureWorkspace(this)
+        }
     }
 
     // ── Drawer ──────────────────────────────────────────────────

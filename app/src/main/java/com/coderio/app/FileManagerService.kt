@@ -9,7 +9,7 @@ import java.io.File
  * All paths are resolved relative to [basePath] (the configured workspace).
  * Security: paths are canonicalized to prevent traversal outside basePath.
  */
-class FileManagerService(private val basePath: String) {
+class FileManagerService(val basePath: String) {
 
     data class FileEntry(
         val name: String,

@@ -85,7 +85,7 @@ class TerminalFragment : Fragment() {
     }
 
     private fun startShell() {
-        val dataDir = context?.filesDir?.absolutePath
+        val cwd = WorkspaceConfig.WORKSPACE_PATH
 
         shell = ShellSession().apply {
             onOutput = { text ->
@@ -103,7 +103,6 @@ class TerminalFragment : Fragment() {
         }
 
         // Set initial CWD
-        val cwd = dataDir ?: "/data/local/tmp"
         shell!!.start(cwd)
 
         appendOutput("coder.io terminal — powered by Android shell\n")
